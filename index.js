@@ -11,24 +11,6 @@ const io = new Server(httpServer, {
   }
 });
 
-function get_home_device(homeId){
-  let devices = []
-  devices = get_device(homeId);
-  console.log("Get home device", devices);
-  return devices;
-}
-
-
-// const get_device = (con, homeId, callback) => {
-//   let sql = `SELECT * FROM devices WHERE devices.home_id = '${homeId}';`;
-//   console.log(sql);
-//   con.query(sql, (queryErr, result) => {
-//       if (queryErr) throw queryErr;
-//       callback(result);
-//       //return result[0].id;
-//   });
-// };
-
 function get_device(homeId){
   let resp_data = []
   return new Promise(function(resolve, reject){
