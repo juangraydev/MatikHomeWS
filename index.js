@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+let dbConn = require('./db');
 const http = require("http");
 // const socketio = require("socket.io");
 
