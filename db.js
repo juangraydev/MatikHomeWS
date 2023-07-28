@@ -13,5 +13,6 @@ var connection = mysql.createConnection({
 // 		console.log('Database Connected Successfully..!!');
 // 	}
 // });
+connection.connect();
 
 module.exports = connection;
