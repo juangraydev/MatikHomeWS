@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: "containers-us-west-51.railway.app",
+    host: "localhost",
     user: "root",
-    password: "PFriq1CEYtDFbwnj4wqm",
-    database: "railway"
+    password: "",
+    database: "matik_db"
 });
 connection.connect(function(error){
 	if(!!error) {
