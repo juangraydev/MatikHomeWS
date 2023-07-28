@@ -9,7 +9,7 @@ var dbConn = require('./db')
 
 app.use(
   cors({
-    origin: "*"
+    origin: "https://matikhomews-production.up.railway.app"
   })
 )
 
