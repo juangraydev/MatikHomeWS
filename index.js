@@ -116,26 +116,16 @@
 //   console.log('listening on *:8001');
 // });
 
+const http = require("http");
+// const socketio = require("socket.io");
 
-
-const express = require("express");
-const socketio = require("socket.io");
-
-const app = express();
-
-app.use(express.static("public"));
-
-const io = socketio(app);
-
-// server.on("connection", (socket) => {
-//   console.log("New connection from", socket.id);
-
-//   socket.on("message", (data) => {
-//     console.log("Received message from", socket.id, data);
-
-//     socket.broadcast("message", data);
-//   });
-// });
+const server = http.createServer();
+// const io = socketio(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
 
 
 function get_device(homeId){
@@ -233,12 +223,6 @@ io.on("connection", (socket) => {
     //   })
     // socket.emit("home_devices", devices)
   });
-});
-
-io.options({
-  cors: {
-    origin: "*",
-  },
 });
 
 server.listen(8080);
