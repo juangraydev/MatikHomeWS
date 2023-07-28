@@ -4,7 +4,8 @@
   "description": "This is the websocket server for matikhome",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "dev": "nodemon index",
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
