@@ -120,13 +120,13 @@
 
 
 
-
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const http = require('http');
 const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
-var mysql = require('mysql');
+// var mysql = require('mysql');
 var dbConn = require('./db')
 const PORT = process.env.PORT || 8001
 const io = new Server(httpServer, {
@@ -135,12 +135,12 @@ const io = new Server(httpServer, {
   }
 });
 
-function get_home_device(homeId){
-  let devices = []
-  devices = get_device(homeId);
-  console.log("Get home device", devices);
-  return devices;
-}
+// function get_home_device(homeId){
+//   let devices = []
+//   devices = get_device(homeId);
+//   console.log("Get home device", devices);
+//   return devices;
+// }
 
 function get_device(homeId){
   let resp_data = []
@@ -202,41 +202,41 @@ function update_channel(channelData){
 io.on("connection", (socket) => {
   let devices = []
   console.log('a user connected',socket.id);
-  // socket.on("home_devices", async(homeId) => { 
-  //   console.log("recieve");
-  //   await get_device(homeId.replaceAll("-",""))
-  //     .then((res)=>{
-  //       devices = res
-  //     })
-  //     .catch((err)=>{
-  //         throw err
-  //     })
-  //   socket.emit("home_devices", devices)
-  // });
+  socket.on("home_devices", async(homeId) => { 
+    console.log("[homeId]", homeId);
+    await get_device(homeId.replaceAll("-",""))
+      .then((res)=>{
+        devices = res
+      })
+      .catch((err)=>{
+          throw err
+      })
+    socket.emit("home_devices", devices)
+  });
 
-  // socket.on("channel", async(homeId, data) => { 
-  //   console.log("recieve", homeId, data);
-  //   await update_channel(JSON.parse(data))
-  //     .then(async (res) => {
-  //       console.log("res", res);
-  //       await get_device(homeId.replaceAll("-",""))
-  //         .then((res)=>{
-  //           devices = res
-  //         })
-  //         .catch((err)=>{
-  //             throw err
-  //         })
-  //       socket.emit("home_devices", devices)
-  //     })
-  //   // await get_device(homeId.replaceAll("-",""))
-  //   //   .then((res)=>{
-  //   //     devices = res
-  //   //   })
-  //   //   .catch((err)=>{
-  //   //       throw err
-  //   //   })
-  //   // socket.emit("home_devices", devices)
-  // });
+  socket.on("channel", async(homeId, data) => { 
+    console.log("recieve", homeId, data);
+    await update_channel(JSON.parse(data))
+      .then(async (res) => {
+        console.log("res", res);
+        await get_device(homeId.replaceAll("-",""))
+          .then((res)=>{
+            devices = res
+          })
+          .catch((err)=>{
+              throw err
+          })
+        socket.emit("home_devices", devices)
+      })
+    // await get_device(homeId.replaceAll("-",""))
+    //   .then((res)=>{
+    //     devices = res
+    //   })
+    //   .catch((err)=>{
+    //       throw err
+    //   })
+    // socket.emit("home_devices", devices)
+  });
 });
 
 

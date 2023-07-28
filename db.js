@@ -6,12 +6,12 @@ var connection = mysql.createConnection({
     database: process.env.MYSQLDATABASE,
     port: process.env.MYSQLPORT
 });
-connection.connect(function(error){
-	if(!!error) {
-		console.log(error);
-	} else {
-		console.log('Database Connected Successfully..!!');
-	}
-});
+// connection.connect(function(error){
+// 	if(!!error) {
+// 		console.log(error);
+// 	} else {
+// 		console.log('Database Connected Successfully..!!');
+// 	}
+// });
 
 module.exports = connection;
