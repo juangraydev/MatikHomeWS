@@ -7,7 +7,9 @@ var mysql = require('mysql');
 var dbConn = require('./db')
 const io = new Server(httpServer, {
   cors: {
-    origin: "*"
+    origin: "https://matikhome.up.railway.app/",
+    methods: ["*"]
+
   }
 });
 
