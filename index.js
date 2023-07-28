@@ -227,7 +227,7 @@ io.on("connection", (socket) => {
           .catch((err)=>{
               throw err
           })
-        socket.emit("home_devices", devices)
+        io.emit("home_devices", devices)
       })
     // await get_device(homeId.replaceAll("-",""))
     //   .then((res)=>{
