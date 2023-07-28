@@ -1,17 +1,18 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const cors = require('cors');
 const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
 var mysql = require('mysql');
 var dbConn = require('./db')
-const io = new Server(httpServer, {
-  cors: {
-    origin: "https://matikhome.up.railway.app/",
-    methods: ["*"]
+const io = new Server(httpServer);
 
-  }
-});
+io.use(
+  cors({
+    origin: "*"
+  })
+)
 
 function get_device(homeId){
   let resp_data = []
