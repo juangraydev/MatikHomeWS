@@ -123,7 +123,7 @@ const server = http.createServer();
 // const io = socketio(server);
 const io = require('socket.io')(server, {
   cors: {
-    origin: '*',
+    origin: 'https://matikhome.up.railway.app',
   }
 });
 
