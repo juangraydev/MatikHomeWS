@@ -3,8 +3,7 @@ var connection = mysql.createConnection({
     host: "containers-us-west-51.railway.app",
     user: "root",
     password: "PFriq1CEYtDFbwnj4wqm",
-    database: "railway",
-    port: 7336
+    database: "railway"
 });
 connection.connect(function(error){
 	if(!!error) {
