@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 var mysql = require('mysql');
 var dbConn = require('./db')
 
-httpServer.use(
+app.use(
   cors({
     origin: "*"
   })
