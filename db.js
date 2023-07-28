@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: "containers-us-west-51.railway.app",
-    user: "root",
-    password: "PFriq1CEYtDFbwnj4wqm",
-    database: "railway",
-    port: 7336
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
 });
 connection.connect(function(error){
 	if(!!error) {
