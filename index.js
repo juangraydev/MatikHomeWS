@@ -6,14 +6,14 @@ const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
 var mysql = require('mysql');
 var dbConn = require('./db')
-const io = new Server(httpServer);
 
-io.use(
+httpServer.use(
   cors({
     origin: "*"
   })
 )
 
+const io = new Server(httpServer);
 function get_device(homeId){
   let resp_data = []
   return new Promise(function(resolve, reject){
