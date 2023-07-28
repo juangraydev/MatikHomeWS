@@ -7,7 +7,7 @@ const server = http.createServer();
 // const io = socketio(server);
 const io = require('socket.io')(server, {
   cors: {
-    origin: ['*'],
+    origin: ['http://127.0.0.1:3000'],
   }
 });
 
@@ -109,6 +109,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT);
 
 console.log(`Server listening on port ${process.env.PORT}`);
