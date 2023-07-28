@@ -202,41 +202,41 @@ function update_channel(channelData){
 io.on("connection", (socket) => {
   let devices = []
   console.log('a user connected',socket.id);
-  socket.on("home_devices", async(homeId) => { 
-    console.log("recieve");
-    await get_device(homeId.replaceAll("-",""))
-      .then((res)=>{
-        devices = res
-      })
-      .catch((err)=>{
-          throw err
-      })
-    socket.emit("home_devices", devices)
-  });
+  // socket.on("home_devices", async(homeId) => { 
+  //   console.log("recieve");
+  //   await get_device(homeId.replaceAll("-",""))
+  //     .then((res)=>{
+  //       devices = res
+  //     })
+  //     .catch((err)=>{
+  //         throw err
+  //     })
+  //   socket.emit("home_devices", devices)
+  // });
 
-  socket.on("channel", async(homeId, data) => { 
-    console.log("recieve", homeId, data);
-    await update_channel(JSON.parse(data))
-      .then(async (res) => {
-        console.log("res", res);
-        await get_device(homeId.replaceAll("-",""))
-          .then((res)=>{
-            devices = res
-          })
-          .catch((err)=>{
-              throw err
-          })
-        socket.emit("home_devices", devices)
-      })
-    // await get_device(homeId.replaceAll("-",""))
-    //   .then((res)=>{
-    //     devices = res
-    //   })
-    //   .catch((err)=>{
-    //       throw err
-    //   })
-    // socket.emit("home_devices", devices)
-  });
+  // socket.on("channel", async(homeId, data) => { 
+  //   console.log("recieve", homeId, data);
+  //   await update_channel(JSON.parse(data))
+  //     .then(async (res) => {
+  //       console.log("res", res);
+  //       await get_device(homeId.replaceAll("-",""))
+  //         .then((res)=>{
+  //           devices = res
+  //         })
+  //         .catch((err)=>{
+  //             throw err
+  //         })
+  //       socket.emit("home_devices", devices)
+  //     })
+  //   // await get_device(homeId.replaceAll("-",""))
+  //   //   .then((res)=>{
+  //   //     devices = res
+  //   //   })
+  //   //   .catch((err)=>{
+  //   //       throw err
+  //   //   })
+  //   // socket.emit("home_devices", devices)
+  // });
 });
 
 
