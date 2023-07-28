@@ -112,9 +112,9 @@
 // });
 
 
-httpServer.listen(8001, () => {
-  console.log('listening on *:8001');
-});
+// httpServer.listen(8001, () => {
+//   console.log('listening on *:8001');
+// });
 
 
 
@@ -235,7 +235,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.options({
+io.options({
   cors: {
     origin: "*",
   },
