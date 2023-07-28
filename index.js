@@ -126,22 +126,14 @@ const app = express();
 const http = require('http');
 const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
-const mysql = require('mysql');
+// const mysql = require('mysql');
 // var mysql = require('mysql');
-// var dbConn = require('./db')
+var dbConn = require('./db')
 const PORT = process.env.PORT || 8001
 const io = new Server(httpServer, {
   cors: {
     origin: "*"
   }
-});
-
-var dbConn = mysql.createConnection({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT
 });
 
 // function get_home_device(homeId){
