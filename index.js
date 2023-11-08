@@ -205,15 +205,17 @@ io.on("connection", (socket) => {
   console.log('a user connected',socket.id);
   socket.on("home_devices", async(homeId) => { 
     console.log("[homeId]", homeId);
-    await get_device(homeId.replaceAll("-",""))
-      .then((res)=>{
-        console.log("[devices]", devices);
-        devices = res
-      })
-      .catch((err)=>{
-          throw err
-      })
-    socket.emit("home_devices", devices)
+    if(homeId){
+      await get_device(homeId.replaceAll("-",""))
+        .then((res)=>{
+          console.log("[devices]", devices);
+          devices = res
+        })
+        .catch((err)=>{
+            throw err
+        })
+      socket.emit("home_devices", devices)
+    }
   });
 
   socket.on("channel", async(homeId, data) => { 
@@ -230,14 +232,6 @@ io.on("connection", (socket) => {
           })
         io.emit("home_devices", devices)
       })
-    // await get_device(homeId.replaceAll("-",""))
-    //   .then((res)=>{
-    //     devices = res
-    //   })
-    //   .catch((err)=>{
-    //       throw err
-    //   })
-    // socket.emit("home_devices", devices)
   });
 });
 
