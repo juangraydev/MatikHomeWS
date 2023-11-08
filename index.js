@@ -127,7 +127,7 @@ const http = require('http');
 const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
 var dbConn = require('./db')
-const PORT = process.env.PORT || 8001
+const PORT = process.env.PORT || 8000
 const io = new Server(httpServer, {
   cors: {
     origin: "*"
