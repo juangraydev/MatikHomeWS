@@ -126,8 +126,6 @@ const app = express();
 const http = require('http');
 const httpServer = http.createServer(app);
 const { Server } = require("socket.io");
-const mysql = require('mysql');
-// var mysql = require('mysql');
 var dbConn = require('./db')
 const PORT = process.env.PORT || 8001
 const io = new Server(httpServer, {
@@ -145,6 +143,7 @@ const io = new Server(httpServer, {
 
 function get_device(homeId){
   let resp_data = []
+  console.log("[homeId]", homeId);
   return new Promise(function(resolve, reject){
     let sql = `SELECT * FROM devices WHERE home_id = '${homeId.replaceAll("-","")}'`
     dbConn.query(sql, async function(err,rows)     {
@@ -152,6 +151,7 @@ function get_device(homeId){
         reject(err)
       } else {
         var res_device = []
+        console.log("[rows]", rows);
         for (let index = 0; index < rows.length; index++) {
           const element = rows[index];
           var device_channel = []
@@ -207,6 +207,7 @@ io.on("connection", (socket) => {
     console.log("[homeId]", homeId);
     await get_device(homeId.replaceAll("-",""))
       .then((res)=>{
+        console.log("[devices]", devices);
         devices = res
       })
       .catch((err)=>{
