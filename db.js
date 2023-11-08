@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     user: "root",
     password: "3zjhXq8tOTpXG2XwGdH0",
     database: "railway",
-    port: process.env.MYSQLPORT
+    connectTimeout: 10000,
 });
 
 module.exports = connection
