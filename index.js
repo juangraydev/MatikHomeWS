@@ -13,19 +13,7 @@ const io = new Server(httpServer, {
   }
 });
 
-// var io = require('socket.io-client');
-// var socketClient = io.connect(`http://localhost:${PORT}`, {reconnect: true});
-
-
-// // Add a connect listener
-// socketClient.on('connect', function(socket) {
-//   console.log('Connected!');
-// });
-
-// socket.emit('CH01', 'me', 'test msg');
-
 // Check for changes every second
-
 function groupByDevice(arr){
   return arr.reduce((result, currentItem) => {
     (result[currentItem.device_id] = result[currentItem.device_id] || []).push(currentItem);
@@ -35,7 +23,6 @@ function groupByDevice(arr){
 
 function getNonMatchingIndices(arr1, arr2) {
   let nonMatchingIndices = [];
-
   for(let i = 0; i < arr1.length; i++) {
       // Convert objects to string for comparison
       if(JSON.stringify(arr1[i]) !== JSON.stringify(arr2[i])) {
@@ -59,23 +46,6 @@ function get_device_home(deviceId) {
         reject(err)
       } else {
         console.log("[rows]", rows);
-        // var res_device = []
-        // // console.log("[rows]", rows);
-        // for (let index = 0; index < rows.length; index++) {
-        //   const element = rows[index];
-        //   var device_channel = []
-        //   await get_channel(element.id)
-        //     .then((channel)=>{
-        //       channel?.map((channel) => {
-        //         device_channel.push(channel)
-        //       })
-        //     })
-        //     .catch((err)=>{
-        //         throw err
-        //     })
-          
-        //   res_device = res_device.concat(device_channel)
-        // }
         resolve(rows[0]);
       }
     });
@@ -84,11 +54,8 @@ function get_device_home(deviceId) {
 
 
 function get_device(homeId){
-  let resp_data = []
-  // console.log("[homeId]", homeId);
   return new Promise(function(resolve, reject){
     let sql = `SELECT * FROM devices WHERE home_id = '${homeId}'`
-    // console.log("[[sql]]", sql, homeId)
     dbConn.query(sql, async function(err,rows)     {
       if(err) {
         reject(err)
