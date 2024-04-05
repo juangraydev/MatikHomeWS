@@ -57,6 +57,7 @@ function get_device(homeId){
         reject(err)
       } else {
         var res_device = []
+        console.log("[DEBUG], get device", rows);
         for (let index = 0; index < rows.length; index++) {
           const element = rows[index];
           var device_channel = []
@@ -64,7 +65,9 @@ function get_device(homeId){
             .then((channel)=>{
               channel?.map((channel) => {
                 let now = new Date();
-                if(Math.abs(now.getTime() - element['updated_at'].getTime()) / (1000 * 60) > 60){
+                const timeDifferenceMs = now - new Date(element['updated_at']);
+                console.log("[DEBUG] Device Channel: ", new Date(element['updated_at']), now, timeDifferenceMs);
+                if(timeDifferenceMs > 60e3){
                   channel['device_status'] = 0
                 }else {
                   channel['device_status'] = 1
