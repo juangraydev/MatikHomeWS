@@ -120,7 +120,7 @@ io.on("connection", (socket) => {
   function listenDevice() {
     console.log(`[${new Date().getMinutes() + ':' + new Date().getSeconds()}][Info] listedDevice`);
     try {
-      dbConn.query('SELECT * FROM channels', function async (err, result) {\
+      dbConn.query('SELECT * FROM channels', function async (err, result) {
         if (err) throw err;
         if (JSON.stringify(prev_results) != JSON.stringify(result)) {
           let comp_result = getNonMatchingIndices(prev_results, result)
